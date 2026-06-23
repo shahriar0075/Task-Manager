@@ -1,16 +1,16 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:task_management/data/models/login_model.dart';
 import 'package:task_management/data/service/network_clint.dart';
+import 'package:task_management/ui/controllers/auth_controller.dart';
 import 'package:task_management/ui/screens/forgot_password_verify_email_screen.dart';
 import 'package:task_management/ui/screens/main_bottom_nave_screen.dart';
 import 'package:task_management/ui/screens/register_screen.dart';
 import 'package:task_management/ui/widgets/screen_background.dart';
 import 'package:task_management/ui/widgets/snack_bar_message.dart';
-
 import '../../data/utils/urls.dart';
 import '../widgets/center_circular_process_indicator.dart';
-
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -127,6 +127,13 @@ class _LoginScreenState extends State<LoginScreen> {
     _logInProgress =false;
     setState(() {});
     if(response.isSuccess){
+      LoginModel loginModel = LoginModel.fromJson(response.data!);
+      //TODO: save token to local
+      AuthController.savedUserInformation(loginModel.token, loginModel.userModel);
+      //TODO: local database set up
+      //TODO: Logged in or not
+
+
       showSnackBarMessage(context, 'Log In Successful');
       Navigator.pushAndRemoveUntil(context,
           MaterialPageRoute( builder: (context)=> const MainBottomNaveScreen()),
