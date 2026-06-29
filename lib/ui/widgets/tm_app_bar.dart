@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:task_management/ui/controllers/auth_controller.dart';
 
+import '../screens/login_screen.dart';
 import '../screens/update_profile_screen.dart';
 
 class TMAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -29,12 +31,12 @@ class TMAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Shahriar Rahman',style: textTheme.titleMedium?.copyWith(color: Colors.white),),
-                  Text('shakib@gmail.com',style: textTheme.bodySmall?.copyWith(color: Colors.white))
+                  Text(AuthController.userModel?.fullName ?? '',style: textTheme.titleMedium?.copyWith(color: Colors.white),),
+                  Text(AuthController.userModel?.email ?? 'Unknown' ,style: textTheme.bodySmall?.copyWith(color: Colors.white))
                 ],
               ),
             ),
-            IconButton(onPressed: (){}, icon: Icon(Icons.logout))
+            IconButton(onPressed: ()=>_onTapLogOutButton(context), icon: Icon(Icons.logout))
           ],
         ),
       ),
@@ -44,6 +46,15 @@ class TMAppBar extends StatelessWidget implements PreferredSizeWidget {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => const UpdateProfileScreen()));
   }
+
+  Future <void> _onTapLogOutButton(BuildContext context) async{
+    await AuthController.clearUserData();
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context)=> const LoginScreen()),
+        (predicate)=>false);
+  }
+
   @override
   Size get preferredSize =>Size.fromHeight(kToolbarHeight);
 }
