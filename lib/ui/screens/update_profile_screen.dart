@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:task_management/data/models/user_model.dart';
@@ -109,7 +111,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     controller: _passwordTEController,
                     decoration: InputDecoration(
                       hintText: 'Password',
-                      suffix: IconButton(
+                      suffixIcon: IconButton(
                         onPressed: () {
                           _isObscured1 = !_isObscured1;
                         },
@@ -189,13 +191,18 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     if(_passwordTEController.text.isEmpty){
       requestBody["password"]= _passwordTEController.text;
     }
+
+    if(_pickedImage!=null){
+      List<int> imageBytes = await _pickedImage!.readAsBytes();
+      String encodedImage = base64Encode(imageBytes);
+      requestBody['photo'] = encodedImage;
+    }
+
     NetworkResponse response = await NetworkClient.postRequest(
         url: Urls.updateProfileUrl,
         body: requestBody);
     _updateProfileInProgress =false;
-    setState(() {
-
-    });
+    setState(() {});
     if(response.isSuccess){
       if(response.data !=null && response.data!['data'] != null){
         UserModel updateUser = UserModel.fromJson((response.data!['data']));
@@ -216,7 +223,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     if(image!=null){
       _pickedImage =image;
       setState(() {
-
       });
     }
   }

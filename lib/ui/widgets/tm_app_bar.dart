@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:task_management/ui/controllers/auth_controller.dart';
 import '../screens/login_screen.dart';
@@ -24,6 +26,9 @@ class TMAppBar extends StatelessWidget implements PreferredSizeWidget {
           children: [
             CircleAvatar(
               radius: 18,
+              backgroundImage: _shouldShowImage(AuthController.userModel?.photo) ? MemoryImage(
+                  base64Decode(AuthController.userModel?.photo ?? ''),
+              ): null,
             ),
             const SizedBox(width: 8,),
             Expanded(
@@ -41,6 +46,11 @@ class TMAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
     );
   }
+
+  bool _shouldShowImage(String? photo){
+    return photo != null && photo.isNotEmpty;
+  }
+
   void _onTapProfile(BuildContext context) {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => const UpdateProfileScreen()));
