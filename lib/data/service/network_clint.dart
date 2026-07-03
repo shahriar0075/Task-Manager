@@ -1,7 +1,12 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
+import 'package:task_management/app.dart';
+import 'package:task_management/ui/controllers/auth_controller.dart';
+import 'package:task_management/ui/screens/login_screen.dart';
 
 class NetworkResponse{
   final bool isSuccess;
@@ -24,8 +29,11 @@ class NetworkClient {
   static Future<NetworkResponse> getRequest({required String url}) async{
     try{
       Uri uri = Uri.parse(url);
-      _preRequestLog(url);
-      Response response = await get(uri);
+      Map<String, String>headers = {
+        'Authorization': 'Bearer ${AuthController.token ?? ''}'
+      };
+      _preRequestLog(url, headers);
+      Response response = await get(uri, headers: headers);
       _postRequestLog(
         url,
         response.statusCode,
@@ -36,6 +44,11 @@ class NetworkClient {
         final decodeJson = jsonDecode(response.body);
         return NetworkResponse(
             isSuccess: true, statusCode: response.statusCode, data: decodeJson);
+      }
+      else if (response.statusCode == 401) {
+        _moveToLoginScreen();
+        return NetworkResponse(
+            isSuccess: false, statusCode: response.statusCode, errorMessage: 'Unauthorized! Please Log in again');
       }
       else {
         final decodeJson = jsonDecode(response.body);
@@ -55,10 +68,11 @@ class NetworkClient {
   static Future<NetworkResponse> postRequest({required String url, Map<String, dynamic>?body}) async{
     try{
       Uri uri = Uri.parse(url);
-      _preRequestLog(url, body: body);
-      Response response = await post(uri,headers: {
-        'Content-type' : 'Application/json'
-      },
+      Map<String, String>headers = {
+        'Content-type' : 'Application/json', 'Authorization': 'Bearer ${AuthController.token ?? ''}'
+      };
+      _preRequestLog(url, headers, body: body);
+      Response response = await post(uri,headers: headers,
       body: jsonEncode(body)
       );
       _postRequestLog(
@@ -71,6 +85,11 @@ class NetworkClient {
         final decodeJson = jsonDecode(response.body);
         return NetworkResponse(
             isSuccess: true, statusCode: response.statusCode, data: decodeJson);
+      }
+      else if (response.statusCode == 401) {
+        _moveToLoginScreen();
+        return NetworkResponse(
+            isSuccess: false, statusCode: response.statusCode, errorMessage: 'Unauthorized! Please Log in again');
       }
       else {
         final decodeJson = jsonDecode(response.body);
@@ -85,9 +104,9 @@ class NetworkClient {
       return NetworkResponse(isSuccess: false, statusCode: -1, errorMessage: e.toString());
     }
   }
-  static void _preRequestLog(String url, {Map<String, dynamic>? body}){
+  static void _preRequestLog(String url,Map<String, String>headers, {Map<String, dynamic>? body}){
     _logger.i(
-        'URL=>$url\n'
+        'URL=>$url\nHeaders: $headers'
             'Body: $body'
     );
   }
@@ -108,5 +127,13 @@ class NetworkClient {
               'Response:$responseBody\n'
       );
     }
+  }
+
+  static void _moveToLoginScreen() async{
+    await AuthController.clearUserData();
+    Navigator.pushAndRemoveUntil(
+        TaskManagerApp.navigatorkey.currentContext!,
+        MaterialPageRoute(builder: (context)=> LoginScreen()),
+        (predicate)=> false);
   }
 }

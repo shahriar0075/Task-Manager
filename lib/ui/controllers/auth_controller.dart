@@ -45,5 +45,4 @@ static Future<void>getUserInformation() async {
     token=null;
     userModel=null;
   }
-
 }

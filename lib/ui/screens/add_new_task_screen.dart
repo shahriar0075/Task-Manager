@@ -53,5 +53,3 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
     Navigator.pushAndRemoveUntil(context, MaterialPageRoute( builder: (contex)=> const MainBottomNaveScreen()), (pre)=>false);
   }
 }
-
-

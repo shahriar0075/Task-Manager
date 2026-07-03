@@ -208,5 +208,4 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _passwordTEController.dispose();
     super.dispose();
   }
-
 }

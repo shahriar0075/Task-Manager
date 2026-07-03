@@ -45,5 +45,3 @@ class _MainBottomNaveScreenState extends State<MainBottomNaveScreen> {
     );
   }
 }
-
-

@@ -52,7 +52,3 @@ void onTapNewTask(){
         );
   }
 }
-
-
-
-

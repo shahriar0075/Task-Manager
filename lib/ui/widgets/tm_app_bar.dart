@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:task_management/ui/controllers/auth_controller.dart';
-
 import '../screens/login_screen.dart';
 import '../screens/update_profile_screen.dart';
 

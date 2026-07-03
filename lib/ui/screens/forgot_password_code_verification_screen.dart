@@ -85,5 +85,4 @@ class _ForgotPasswordCodeVerificationScreenState extends State<ForgotPasswordCod
     _pinCodeTEController.dispose();
     super.dispose();
   }
-
 }

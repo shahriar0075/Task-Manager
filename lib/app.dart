@@ -4,9 +4,12 @@ import 'package:task_management/ui/screens/spash_screen.dart';
 class TaskManagerApp extends StatelessWidget {
   const TaskManagerApp({super.key});
 
+  static final GlobalKey<NavigatorState> navigatorkey = GlobalKey<NavigatorState>();
+
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(
+      navigatorKey: TaskManagerApp.navigatorkey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorSchemeSeed: Colors.green,
