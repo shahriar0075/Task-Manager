@@ -40,7 +40,7 @@ class TaskCard extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50),
                       ),
-                      backgroundColor: _getStutasChipColor(),
+                      backgroundColor: _getStatusChipColor(),
                       side: BorderSide.none
                   ),
                   const Spacer(
@@ -56,7 +56,7 @@ class TaskCard extends StatelessWidget {
       ),
     );
   }
-  Color _getStutasChipColor(){
+  Color _getStatusChipColor(){
     late Color color;
     switch (taskStatus){
       case TaskStatus.newStatus:

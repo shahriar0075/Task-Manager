@@ -14,7 +14,7 @@ class ResetPasswordScreen extends StatefulWidget {
 
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   final TextEditingController _newPassTEController = TextEditingController();
-  final TextEditingController _confirmNewPasspasswordTEController = TextEditingController();
+  final TextEditingController _confirmNewPasswordTEController = TextEditingController();
   final GlobalKey<FormState> _formKey= GlobalKey<FormState>();
   bool _isObscured2=true;
   bool _isObscured3=true;
@@ -55,7 +55,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   const SizedBox(height: 8,),
                   TextFormField(
                     obscureText: _isObscured3,
-                    controller: _confirmNewPasspasswordTEController,
+                    controller: _confirmNewPasswordTEController,
                     decoration: InputDecoration(
                       hintText: 'Confirm New Password',
                       suffix: IconButton(onPressed: (){
@@ -102,7 +102,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   @override
   void dispose() {
     _newPassTEController.dispose();
-    _confirmNewPasspasswordTEController.dispose();
+    _confirmNewPasswordTEController.dispose();
     super.dispose();
   }
 

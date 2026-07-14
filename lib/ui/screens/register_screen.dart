@@ -99,8 +99,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     validator: (String? value) {
                       String phone =value?.trim() ?? '';
-                      RegExp regx = RegExp(r'^(?:(?:\+|00)88)?01[3-9]\d{8}$');
-                      if (!regx.hasMatch(phone)) {
+                      RegExp regex = RegExp(r'^(?:(?:\+|00)88)?01[3-9]\d{8}$');
+                      if (!regex.hasMatch(phone)) {
                         return 'Enter a valid mobile number';
                       }
                       return null;

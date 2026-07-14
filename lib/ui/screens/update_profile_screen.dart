@@ -172,11 +172,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     if(_fromKey.currentState!.validate()){
       _updateProfile();
     }
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => const MainBottomNaveScreen()),
-      (route) => false,
-    );
   }
 
   Future<void> _updateProfile()async {
@@ -197,21 +192,31 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       String encodedImage = base64Encode(imageBytes);
       requestBody['photo'] = encodedImage;
     }
+    else{
+      requestBody['photo'] = AuthController.userModel?.photo ?? "";
+    }
 
     NetworkResponse response = await NetworkClient.postRequest(
         url: Urls.updateProfileUrl,
         body: requestBody);
-    _updateProfileInProgress =false;
-    setState(() {});
+    if(mounted){
+      _updateProfileInProgress = false;
+      setState(() {});
+    }
     if(response.isSuccess){
       if(response.data !=null && response.data!['data'] != null){
         UserModel updateUser = UserModel.fromJson((response.data!['data']));
         await AuthController.savedUserInformation(AuthController.token ?? '', updateUser);
       }
 
-      if(context.mounted) return;
+      if(!context.mounted) return;
       showSnackBarMessage(context, 'Profile Updated Successfully');
       _passwordTEController.clear();
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const MainBottomNaveScreen()),
+            (route) => false,
+      );
     }
     else{
       showSnackBarMessage(context, response.errorMessage, true);

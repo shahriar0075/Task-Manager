@@ -30,7 +30,7 @@ class _ForgotPasswordCodeVerificationScreenState extends State<ForgotPasswordCod
                 ),
                 const SizedBox(height: 6,),
                 Text(
-                    'A 6 digit verification code has been sent to your email adress',
+                    'A 6 digit verification code has been sent to your email address',
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.grey)
                 ),
                 const SizedBox(height: 16,),

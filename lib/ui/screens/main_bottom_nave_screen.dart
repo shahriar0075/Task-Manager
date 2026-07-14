@@ -37,7 +37,7 @@ class _MainBottomNaveScreenState extends State<MainBottomNaveScreen> {
 
           destinations: [
             NavigationDestination(icon: Icon(Icons.new_label), label: 'New'),
-            NavigationDestination(icon: Icon(Icons.ac_unit_sharp), label: 'Progess'),
+            NavigationDestination(icon: Icon(Icons.ac_unit_sharp), label: 'Progress'),
             NavigationDestination(icon: Icon(Icons.done), label: 'Complete'),
             NavigationDestination(icon: Icon(Icons.cancel_outlined), label: 'Cancelled'),
           ]
