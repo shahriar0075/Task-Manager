@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import '../../data/models/task_model.dart';
 
 enum TaskStatus {
   newStatus,
@@ -12,9 +15,11 @@ class TaskCard extends StatelessWidget {
   const TaskCard({
     super.key,
     required this.title,
-    required this.taskStatus
+    required this.taskStatus,
+    required this.taskModel,
   });
   final TaskStatus taskStatus;
+  final TaskModel taskModel;
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +32,16 @@ class TaskCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Title sdjkvfhio',style: TextStyle(
+              Text(taskModel.title,style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold
               ),),
-              Text('Description sdjkvfhio'),
+              Text(taskModel.description),
               const SizedBox(height: 8,),
-              Text('Date: 20/052/2505'),
+              Text('Date: ${DateFormat('dd MMM yyyy, hh:mm a').format(DateTime.parse(taskModel.createDate.toString()))}'),
               Row(
                 children: [
-                  Chip(label: Text(title,style: TextStyle(color: Colors.white),),
+                  Chip(label: Text(taskModel.status,style: TextStyle(color: Colors.white),),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50),
                       ),
