@@ -38,6 +38,7 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
                       title: task.title,
                       taskStatus: TaskStatus.completed,
                       taskModel: _completedTaskList[index],
+                      refreshList: _getCompletedAllTaskList,
                     );
                   }, separatorBuilder: (context,index)=>const SizedBox(height: 1), itemCount: _completedTaskList.length),
             ],

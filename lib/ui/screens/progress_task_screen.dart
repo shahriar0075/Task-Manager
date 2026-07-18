@@ -38,6 +38,7 @@ class _ProgressTaskScreenState extends State<ProgressTaskScreen> {
                           title: task.title,
                           taskStatus: TaskStatus.progress,
                           taskModel: _progressTaskList[index],
+                          refreshList: _getProgressAllTaskList,
                         );
                       }, separatorBuilder: (context,index)=>const SizedBox(height: 1), itemCount: _progressTaskList.length),
           ],

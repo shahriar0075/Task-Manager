@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task_management/ui/widgets/snack_bar_message.dart';
 import 'package:task_management/ui/widgets/summary_card.dart';
-
 import '../../data/models/task_status_count.dart';
 import '../../data/models/task_status_list_model.dart';
 import '../../data/service/network_clint.dart';
@@ -36,15 +35,6 @@ class _TaskCountState extends State<TaskCount> {
                 return SummaryCard(title: _taskStatusCountList[index].status, count: _taskStatusCountList[index].count);
               }),
         ),
-        // child: Row(
-        //   children: [
-        //     SummaryCard(title: 'New',count: 12),
-        //     SummaryCard(title: '
-        //     ',count: 12),
-        //     SummaryCard(title: 'Cancelled',count: 12),
-        //     SummaryCard(title: 'Progress',count: 12),
-        //   ],
-        // ),
       ),
     );
   }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:task_management/ui/widgets/Task_Count.dart';
 import '../../data/models/task_list_model.dart';
 import '../../data/models/task_model.dart';
 import '../../data/service/network_clint.dart';
 import '../../data/utils/urls.dart';
+import '../widgets/Task_Count.dart';
 import '../widgets/snack_bar_message.dart';
 import '../widgets/task_card.dart';
 
@@ -38,6 +38,7 @@ class _CancelledTaskScreenState extends State<CancelledTaskScreen> {
                       title: task.title,
                       taskStatus: TaskStatus.cancelled,
                       taskModel: _cancelledTaskList[index],
+                      refreshList: _getCancelledAllTaskList,
                     );
                   }, separatorBuilder: (context,index)=>const SizedBox(height: 1), itemCount: _cancelledTaskList.length),
             ],

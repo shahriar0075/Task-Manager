@@ -46,6 +46,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                         title: task.title,
                         taskStatus: TaskStatus.newStatus,
                         taskModel: _newtaskList[index],
+                        refreshList: _getNewAllTaskList,
                       );
                 }, separatorBuilder: (context,index)=>const SizedBox(height: 1), itemCount: _newtaskList.length),
               ),
