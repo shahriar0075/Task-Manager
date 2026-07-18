@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:task_management/ui/widgets/Task_Count.dart';
-import '../../data/models/task_list_model.dart';
-import '../../data/models/task_model.dart';
-import '../../data/service/network_clint.dart';
-import '../../data/utils/urls.dart';
-import '../widgets/snack_bar_message.dart';
-import '../widgets/task_card.dart';
+import 'package:task_management/data/models/task_list_model.dart';
+import 'package:task_management/data/models/task_model.dart';
+import 'package:task_management/data/service/network_clint.dart';
+import 'package:task_management/data/utils/urls.dart';
+import 'package:task_management/ui/widgets/snack_bar_message.dart';
+import 'package:task_management/ui/widgets/task_card.dart';
 
 class CompletedTaskScreen extends StatefulWidget {
   const CompletedTaskScreen({super.key});

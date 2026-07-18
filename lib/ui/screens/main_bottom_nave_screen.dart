@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:task_management/ui/screens/completed_task_screen.dart';
 import 'package:task_management/ui/screens/new_task_screen.dart';
 import 'package:task_management/ui/screens/progress_task_screen.dart';
-import '../widgets/tm_app_bar.dart';
+import 'package:task_management/ui/widgets/tm_app_bar.dart';
 import 'cancelled_task_screen.dart';
 
 class MainBottomNaveScreen extends StatefulWidget {

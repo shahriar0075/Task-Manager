@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:task_management/ui/widgets/snack_bar_message.dart';
 import 'package:task_management/ui/widgets/summary_card.dart';
-import '../../data/models/task_status_count.dart';
-import '../../data/models/task_status_list_model.dart';
-import '../../data/service/network_clint.dart';
-import '../../data/utils/urls.dart';
+import 'package:task_management/data/models/task_status_count.dart';
+import 'package:task_management/data/models/task_status_list_model.dart';
+import 'package:task_management/data/service/network_clint.dart';
+import 'package:task_management/data/utils/urls.dart';
 
 class TaskCount extends StatefulWidget {
   const TaskCount({super.key});

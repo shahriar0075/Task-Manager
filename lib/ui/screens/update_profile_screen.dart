@@ -8,11 +8,9 @@ import 'package:task_management/ui/screens/main_bottom_nave_screen.dart';
 import 'package:task_management/ui/widgets/center_circular_process_indicator.dart';
 import 'package:task_management/ui/widgets/screen_background.dart';
 import 'package:task_management/ui/widgets/tm_app_bar.dart';
-
-import '../../data/service/network_clint.dart';
-import '../../data/utils/urls.dart';
-import '../widgets/snack_bar_message.dart';
-
+import 'package:task_management/data/service/network_clint.dart';
+import 'package:task_management/data/utils/urls.dart';
+import 'package:task_management/ui/widgets/snack_bar_message.dart';
 class UpdateProfileScreen extends StatefulWidget {
   const UpdateProfileScreen({super.key});
 

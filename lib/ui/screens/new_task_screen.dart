@@ -6,8 +6,8 @@ import 'package:task_management/ui/screens/add_new_task_screen.dart';
 import 'package:task_management/ui/widgets/Task_Count.dart';
 import 'package:task_management/ui/widgets/center_circular_process_indicator.dart';
 import 'package:task_management/ui/widgets/snack_bar_message.dart';
-import '../../data/utils/urls.dart';
-import '../widgets/task_card.dart';
+import 'package:task_management/data/utils/urls.dart';
+import 'package:task_management/ui/widgets/task_card.dart';
 
 class NewTaskScreen extends StatefulWidget {
   const NewTaskScreen({super.key});

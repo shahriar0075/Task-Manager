@@ -9,8 +9,8 @@ import 'package:task_management/ui/screens/main_bottom_nave_screen.dart';
 import 'package:task_management/ui/screens/register_screen.dart';
 import 'package:task_management/ui/widgets/screen_background.dart';
 import 'package:task_management/ui/widgets/snack_bar_message.dart';
-import '../../data/utils/urls.dart';
-import '../widgets/center_circular_process_indicator.dart';
+import 'package:task_management/data/utils/urls.dart';
+import 'package:task_management/ui/widgets/center_circular_process_indicator.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

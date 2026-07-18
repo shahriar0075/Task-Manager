@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:task_management/data/service/network_clint.dart';
 import 'package:task_management/ui/widgets/snack_bar_message.dart';
-
-import '../../data/models/task_model.dart';
-import '../../data/utils/urls.dart';
+import 'package:task_management/data/models/task_model.dart';
+import 'package:task_management/data/utils/urls.dart';
 
 enum TaskStatus {
   newStatus,
@@ -66,7 +65,7 @@ class _TaskCardState extends State<TaskCard> {
                     child: Row(
                       children: [
                         IconButton(onPressed: _showUpdateStatusDialog, icon: const Icon(Icons.edit, color: Colors.green,)),
-                        IconButton(onPressed: () {}, icon: const Icon(Icons.delete, color: Colors.red,))
+                        IconButton(onPressed: _deleteTask, icon: const Icon(Icons.delete, color: Colors.red,))
                       ],
                     ),
                   ),
@@ -161,5 +160,18 @@ class _TaskCardState extends State<TaskCard> {
     }
     _inProgress = false;
 
+  }
+  Future<void> _deleteTask() async {
+    _inProgress = true;
+    setState(() {});
+    final NetworkResponse response = await NetworkClient.getRequest(url: Urls.deleteTaskUrl(widget.taskModel.id));
+    if(response.isSuccess){
+      widget.refreshList();
+    }
+    else{
+      showSnackBarMessage(context, response.errorMessage, true);
+      setState(() {});
+    }
+    _inProgress = false;
   }
 }

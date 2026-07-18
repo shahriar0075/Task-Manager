@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:task_management/ui/controllers/auth_controller.dart';
-import '../screens/login_screen.dart';
-import '../screens/update_profile_screen.dart';
+import 'package:task_management/ui/screens/login_screen.dart';
+import 'package:task_management/ui/screens/update_profile_screen.dart';
 
 class TMAppBar extends StatelessWidget implements PreferredSizeWidget {
   const TMAppBar({

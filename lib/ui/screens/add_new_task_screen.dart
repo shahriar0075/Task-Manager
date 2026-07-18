@@ -4,8 +4,8 @@ import 'package:task_management/ui/widgets/center_circular_process_indicator.dar
 
 import 'package:task_management/ui/widgets/screen_background.dart';
 import 'package:task_management/ui/widgets/snack_bar_message.dart';
-import '../../data/utils/urls.dart';
-import '../widgets/tm_app_bar.dart';
+import 'package:task_management/data/utils/urls.dart';
+import 'package:task_management/ui/widgets/tm_app_bar.dart';
 
 
 class AddNewTaskScreen extends StatefulWidget {

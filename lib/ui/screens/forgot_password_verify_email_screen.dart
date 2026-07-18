@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:task_management/ui/widgets/screen_background.dart';
-
 import 'forgot_password_code_verification_screen.dart';
 
 
