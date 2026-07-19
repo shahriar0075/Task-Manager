@@ -1,13 +1,17 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:task_management/data/service/network_clint.dart';
+import 'package:task_management/data/utils/urls.dart';
 import 'package:task_management/ui/screens/login_screen.dart';
 import 'package:task_management/ui/screens/reset_password_screen.dart';
 import 'package:task_management/ui/widgets/screen_background.dart';
+import 'package:task_management/ui/widgets/snack_bar_message.dart';
 
 
 class ForgotPasswordCodeVerificationScreen extends StatefulWidget {
-  const ForgotPasswordCodeVerificationScreen({super.key});
+  final String email;
+  const ForgotPasswordCodeVerificationScreen({super.key, required this.email});
 
   @override
   State<ForgotPasswordCodeVerificationScreen> createState() => _ForgotPasswordCodeVerificationScreenState();
@@ -15,6 +19,8 @@ class ForgotPasswordCodeVerificationScreen extends StatefulWidget {
 
 class _ForgotPasswordCodeVerificationScreenState extends State<ForgotPasswordCodeVerificationScreen> {
   final PinInputController _pinCodeTEController = PinInputController();
+  bool _inProgress = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +55,11 @@ class _ForgotPasswordCodeVerificationScreenState extends State<ForgotPasswordCod
                   ),
                 ),
                 const SizedBox(height: 8,),
-                ElevatedButton(onPressed: onTapSubmitButton, child: const Text('Verify')),
+                Visibility(
+                  visible: !_inProgress,
+                  replacement: const Center(child: CircularProgressIndicator()),
+                  child: ElevatedButton(onPressed: _onTapVerifyButton, child: const Text('Verify')),
+                ),
                 const SizedBox(height: 64,),
                 Center(
                   child: Column(
@@ -73,15 +83,43 @@ class _ForgotPasswordCodeVerificationScreenState extends State<ForgotPasswordCod
         ))
     );
   }
-  void onTapSubmitButton(){
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>const ResetPasswordScreen()));
+  Future<void> _onTapVerifyButton() async{
+    final String otp = _pinCodeTEController.text.trim();
+    if(otp.length != 6){
+      showSnackBarMessage(context, 'Invalid OTP');
+      return;
+    }
+    setState(() {
+      _inProgress = true;
+    });
+    final NetworkResponse response = await NetworkClient.getRequest(url: Urls.verifyOtpUrl(widget.email,otp));
+    setState(() {
+      _inProgress = false;
+    });
+
+    if(response.isSuccess && response.data?['success'] == true){
+      if(mounted) {
+        showSnackBarMessage(context, 'OTP verified');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ResetPasswordScreen(
+              email: widget.email,
+              otp: otp,
+            ),
+          ),
+        );
+      }
+    }
+    else{
+      showSnackBarMessage(context, response.errorMessage, true);
+    }
   }
   void _onTapSignInButton(){
     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const LoginScreen()),(pre)=>false);
   }
   @override
   void dispose() {
-    // TODO: implement dispose
     _pinCodeTEController.dispose();
     super.dispose();
   }
